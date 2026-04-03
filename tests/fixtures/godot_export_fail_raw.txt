@@ -1,0 +1,10 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA - Compatibility - Device: NVIDIA Corporation GeForce RTX 4090/PCIe/SSE2
+Importing scene: res://levels/level_01.tscn
+Importing resource: res://assets/player.png
+Shader compile: res://shaders/water.gdshader
+ERROR: Shader compilation failed: res://shaders/broken.gdshader
+  At: scene/resources/shader.cpp:245
+Exporting project...
+ERROR: Export failed: Required resource missing: res://assets/missing.png
+  At: editor/export/export.cpp:892

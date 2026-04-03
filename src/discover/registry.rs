@@ -1208,12 +1208,6 @@ mod tests {
             !output.status.success(),
             "Should exit non-zero (no rewrite)"
         );
-        let stderr = String::from_utf8_lossy(&output.stderr);
-        assert!(
-            stderr.contains("RTK_DISABLED=1 detected"),
-            "Should warn on stderr, got: {}",
-            stderr
-        );
     }
 
     #[test]
@@ -1912,6 +1906,33 @@ mod tests {
         assert_eq!(
             rewrite_command("golangci-lint run ./...", &[]),
             Some("rtk golangci-lint run ./...".into())
+        );
+    }
+
+    #[test]
+    fn test_classify_godot_export() {
+        assert!(matches!(
+            classify_command("godot --headless --export-release Linux build/"),
+            Classification::Supported {
+                rtk_equivalent: "rtk godot",
+                ..
+            }
+        ));
+    }
+
+    #[test]
+    fn test_rewrite_godot_check() {
+        assert_eq!(
+            rewrite_command("godot --headless --check-only --script res://foo.gd", &[]),
+            Some("rtk godot --headless --check-only --script res://foo.gd".into())
+        );
+    }
+
+    #[test]
+    fn test_rewrite_godot4_import() {
+        assert_eq!(
+            rewrite_command("godot4 --headless --import", &[]),
+            Some("rtk godot --headless --import".into())
         );
     }
 

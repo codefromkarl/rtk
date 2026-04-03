@@ -1,0 +1,15 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA - Compatibility - Device: NVIDIA Corporation GeForce RTX 4090/PCIe/SSE2
+
+
+
+Scene tree initialized.
+Loading resources...
+Done loading.
+
+Player stats: HP=100, MP=50, Level=5
+Inventory: [Sword, Shield, Potion x3]
+
+DEBUG: Connection established to server
+DEBUG: Ping = 42ms
+Script execution completed successfully.

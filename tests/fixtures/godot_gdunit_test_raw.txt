@@ -1,0 +1,28 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+GdUnit4 Runner v4.3.0
+Running test suite: TestPlayer
+  test_movement ... PASSED (2ms)
+  test_jump ... PASSED (1ms)
+  test_damage ... PASSED (1ms)
+  test_death ... FAILED
+    res://test/TestPlayer.gd:45: Expected <true> but was <false>
+  test_respawn ... PASSED (0ms)
+Running test suite: TestEnemy
+  test_patrol ... PASSED (1ms)
+  test_attack ... PASSED (2ms)
+  test_death ... PASSED (1ms)
+  test_spawn ... FAILED
+    res://test/TestEnemy.gd:112: Expected instance valid but was <null>
+  test_damage ... FAILED
+    res://test/TestEnemy.gd:145: Expected <50> but was <0>
+  test_respawn ... PASSED (1ms)
+
+======================================
+Test Summary
+======================================
+  Tests:     11
+  Passed:    8
+  Failed:    3
+  Skipped:   0
+  Time:      0.34s
+======================================

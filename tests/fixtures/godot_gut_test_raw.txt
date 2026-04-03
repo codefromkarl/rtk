@@ -1,0 +1,32 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+Running script: res://test/test_player.gd
+  PASS: test_movement
+  PASS: test_jump
+  PASS: test_damage
+  FAIL: test_death - Expected true, got false
+    at res://test/test_player.gd:45
+  PASS: test_respawn
+  PASS: test_speed
+---
+6 tests, 5 passed, 1 failed, 0 pending
+Running script: res://test/test_enemy.gd
+  PASS: test_patrol
+  PASS: test_attack
+  PASS: test_death
+  FAIL: test_spawn - Expected instance valid, got null
+    at res://test/test_enemy.gd:112
+  FAIL: test_damage - Expected 50, got 0
+    at res://test/test_enemy.gd:145
+  PASS: test_respawn
+---
+6 tests, 4 passed, 2 failed, 0 pending
+Running script: res://test/test_weapon.gd
+  PASS: test_fire
+  PASS: test_reload
+  PASS: test_ammo
+---
+3 tests, 3 passed, 0 failed, 0 pending
+
+--- Summary ---
+15 tests, 12 passed, 3 failed, 0 pending
+Total time: 0.45s
