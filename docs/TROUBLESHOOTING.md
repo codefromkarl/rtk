@@ -228,6 +228,43 @@ All commands that spawn external tools: `rtk vitest`, `rtk lint`, `rtk tsc`, `rt
 
 ---
 
+## Problem: Godot commands are not rewritten
+
+### Symptom
+```bash
+godot --headless --import
+# runs raw instead of rewriting to rtk godot
+
+godot4 --headless --check-only --script res://foo.gd
+# no RTK rewrite applied
+```
+
+### Checklist
+
+**1. Verify RTK sees the rewrite path:**
+```bash
+rtk rewrite godot --headless --import
+rtk rewrite godot4 --headless --check-only --script res://foo.gd
+```
+
+Expected output should start with `rtk godot ...`.
+
+**2. Verify the hook is installed and active:**
+```bash
+rtk init --show
+```
+
+**3. Check exclusions:**
+If you added `godot` to `[hooks].exclude_commands` in `config.toml`, RTK will skip rewrite.
+
+**4. Use explicit RTK invocation as fallback:**
+```bash
+rtk godot import --headless --import
+rtk godot test --headless -s res://addons/gut/gut_cmdln.gd
+```
+
+---
+
 ## Problem: "command not found: rtk" after installation
 
 ### Symptom

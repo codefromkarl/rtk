@@ -176,6 +176,16 @@ rtk go test                     # Go tests (NDJSON, -90%)
 rtk cargo test                  # Cargo tests (-90%)
 rtk rake test                   # Ruby minitest (-90%)
 rtk rspec                       # RSpec tests (JSON, -60%+)
+rtk godot test                  # GUT/GdUnit4 failures only
+```
+
+### Game Engines
+```bash
+rtk godot export --headless --export-release "Linux" build/   # Export summary
+rtk godot check --headless --check-only --script res://x.gd    # Grouped script errors
+rtk godot test --headless -s res://addons/gut/gut_cmdln.gd     # GUT/GdUnit4 failures only
+rtk godot script --headless -s res://scripts/smoke_test.gd     # Strip engine noise
+rtk godot import --headless --import                           # Import summary
 ```
 
 ### Build & Lint
@@ -426,6 +436,7 @@ Blocked on upstream BeforeToolCallback support ([mistral-vibe#531](https://githu
 | `pytest` | `rtk pytest` |
 | `pip list/install` | `rtk pip ...` |
 | `go test/build/vet` | `rtk go ...` |
+| `godot/godot4` | `rtk godot ...` |
 | `golangci-lint` | `rtk golangci-lint` |
 | `rake test` / `rails test` | `rtk rake test` |
 | `rspec` / `bundle exec rspec` | `rtk rspec` |
