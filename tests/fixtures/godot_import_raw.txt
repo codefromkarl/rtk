@@ -1,0 +1,26 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA - Compatibility - Device: NVIDIA Corporation GeForce RTX 4090/PCIe/SSE2
+Importing scene: res://levels/level_01.tscn
+Importing scene: res://levels/level_02.tscn
+Importing scene: res://levels/level_03.tscn
+Importing resource: res://assets/player.png
+Importing resource: res://assets/enemy.png
+Importing resource: res://assets/tileset.png
+Importing resource: res://assets/background.png
+Importing resource: res://assets/fonts/main.ttf
+Importing resource: res://assets/audio/music.ogg
+Importing resource: res://assets/audio/shoot.wav
+Importing resource: res://assets/audio/explosion.wav
+Importing resource: res://assets/audio/jump.wav
+Importing resource: res://assets/audio/hit.wav
+Importing resource: res://assets/sprites/player_idle.png
+Importing resource: res://assets/sprites/player_run.png
+Importing resource: res://assets/sprites/player_jump.png
+Importing resource: res://assets/sprites/enemy_idle.png
+Importing resource: res://assets/sprites/enemy_walk.png
+Shader compile: res://shaders/water.gdshader
+Shader compile: res://shaders/fog.gdshader
+Shader cache: res://shaders/water.gdshader
+Shader cache: res://shaders/fog.gdshader
+WARNING: Resource res://assets/old_asset.png is deprecated
+Import completed successfully.

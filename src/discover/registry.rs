@@ -2385,6 +2385,35 @@ mod tests {
         ));
     }
 
+    // --- Godot tooling ---
+
+    #[test]
+    fn test_classify_godot_export() {
+        assert!(matches!(
+            classify_command("godot --headless --export-release Linux build/"),
+            Classification::Supported {
+                rtk_equivalent: "rtk godot",
+                ..
+            }
+        ));
+    }
+
+    #[test]
+    fn test_rewrite_godot_check() {
+        assert_eq!(
+            rewrite_command_no_prefixes("godot --headless --check-only --script res://foo.gd", &[]),
+            Some("rtk godot --headless --check-only --script res://foo.gd".into())
+        );
+    }
+
+    #[test]
+    fn test_rewrite_godot4_import() {
+        assert_eq!(
+            rewrite_command_no_prefixes("godot4 --headless --import", &[]),
+            Some("rtk godot --headless --import".into())
+        );
+    }
+
     #[test]
     fn test_classify_golangci_lint() {
         assert!(matches!(

@@ -1,0 +1,31 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA - Compatibility - Device: NVIDIA Corporation GeForce RTX 4090/PCIe/SSE2
+Importing scene: res://levels/level_01.tscn
+Importing scene: res://levels/level_02.tscn
+Importing scene: res://levels/level_03.tscn
+Importing scene: res://levels/level_04.tscn
+Importing scene: res://levels/level_05.tscn
+Importing resource: res://assets/player.png
+Importing resource: res://assets/enemy.png
+Importing resource: res://assets/boss.png
+Importing resource: res://assets/tileset.png
+Importing resource: res://assets/background.png
+Importing resource: res://assets/hud.png
+Importing resource: res://assets/fonts/main.ttf
+Importing resource: res://assets/audio/music.ogg
+Importing resource: res://assets/audio/shoot.wav
+Importing resource: res://assets/audio/explosion.wav
+Shader compile: res://shaders/water.gdshader
+Shader compile: res://shaders/fog.gdshader
+Shader compile: res://shaders/glow.gdshader
+Shader cache: res://shaders/water.gdshader
+Shader cache: res://shaders/fog.gdshader
+Shader cache: res://shaders/glow.gdshader
+Texture compress: res://assets/player.png (ETC2)
+Texture compress: res://assets/enemy.png (ETC2)
+Texture compress: res://assets/boss.png (ETC2)
+Texture compress: res://assets/tileset.png (ETC2)
+Texture compress: res://assets/background.png (ASTC)
+Texture compress: res://assets/hud.png (ASTC)
+Exporting project...
+Export successful: build/game.x86_64 (45.2 MB)

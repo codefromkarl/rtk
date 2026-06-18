@@ -471,6 +471,21 @@ pub const RULES: &[RtkRule] = &[
         subcmd_status: &[],
     },
     RtkRule {
+        pattern: r"^godot\d*(?:\s|$)",
+        rtk_cmd: "rtk godot",
+        rewrite_prefixes: &["godot4", "godot"],
+        category: "Godot",
+        savings_pct: 80.0,
+        subcmd_savings: &[
+            ("export", 90.0),
+            ("check", 80.0),
+            ("test", 90.0),
+            ("script", 70.0),
+            ("import", 85.0),
+        ],
+        subcmd_status: &[],
+    },
+    RtkRule {
         pattern: r"^(?:golangci-lint|golangci)\s+(run)(?:\s|$)",
         rtk_cmd: "rtk golangci-lint run",
         rewrite_prefixes: &["golangci-lint run", "golangci run"],

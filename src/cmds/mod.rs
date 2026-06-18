@@ -4,6 +4,7 @@ pub mod cloud;
 pub mod dotnet;
 pub mod git;
 pub mod go;
+pub mod godot;
 pub mod js;
 pub mod jvm;
 pub mod python;

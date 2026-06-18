@@ -1,0 +1,19 @@
+Godot Engine v4.4.1.stable.official - https://godotengine.org
+SCRIPT ERROR: Parse Error: "function" used as identifier.
+  At: res://scripts/player.gd:15
+SCRIPT ERROR: Parse Error: Unexpected token: Identifier.
+  At: res://scripts/player.gd:42
+SCRIPT ERROR: Parse Error: Indentation mismatch.
+  At: res://scripts/player.gd:78
+SCRIPT ERROR: Parse Error: Expected ')' in expression.
+  At: res://scripts/enemy.gd:23
+WARNING: The identifier 'velocity' is declared but never used.
+  At: res://scripts/enemy.gd:10
+SCRIPT ERROR: Parse Error: Invalid assignment of constant.
+  At: res://scripts/enemy.gd:55
+SCRIPT ERROR: Parse Error: Unindent does not match any outer indentation level.
+  At: res://utils/helpers.gd:8
+WARNING: Variable 'delta' shadows a previous declaration.
+  At: res://utils/helpers.gd:15
+SCRIPT ERROR: Parse Error: Expected end of statement after expression.
+  At: res://utils/helpers.gd:31

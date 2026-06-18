@@ -11,6 +11,7 @@ use cmds::cloud::{aws_cmd, container, curl_cmd, psql_cmd, wget_cmd};
 use cmds::dotnet::{binlog, dotnet_cmd, dotnet_format_report, dotnet_trx};
 use cmds::git::{diff_cmd, gh_cmd, git, glab_cmd, gt_cmd};
 use cmds::go::{go_cmd, golangci_cmd};
+use cmds::godot::godot_cmd;
 use cmds::js::{
     lint_cmd, next_cmd, npm_cmd, playwright_cmd, pnpm_cmd, prettier_cmd, prisma_cmd, tsc_cmd,
     vitest_cmd,
@@ -714,6 +715,12 @@ enum Commands {
         command: GoCommands,
     },
 
+    /// Godot engine commands with compact output
+    Godot {
+        #[command(subcommand)]
+        command: GodotCommands,
+    },
+
     /// Graphite (gt) stacked PR commands with compact output
     Gt {
         #[command(subcommand)]
@@ -1127,6 +1134,38 @@ enum GoCommands {
         args: Vec<String>,
     },
     /// Passthrough: runs any unsupported go subcommand directly
+    #[command(external_subcommand)]
+    Other(Vec<OsString>),
+}
+
+#[derive(Debug, Subcommand)]
+enum GodotCommands {
+    /// Export with compact output
+    Export {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
+    /// Script check with grouped errors
+    Check {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
+    /// Test runner with compact output
+    Test {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
+    /// Script execution with stripped banner
+    Script {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
+    /// Import resources with compact summary
+    Import {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
+    /// Passthrough: runs any unsupported godot subcommand directly
     #[command(external_subcommand)]
     Other(Vec<OsString>),
 }
@@ -2189,6 +2228,15 @@ fn run_cli() -> Result<i32> {
             GoCommands::Other(args) => go_cmd::run_other(&args, cli.verbose)?,
         },
 
+        Commands::Godot { command } => match command {
+            GodotCommands::Export { args } => godot_cmd::run_export(&args, cli.verbose)?,
+            GodotCommands::Check { args } => godot_cmd::run_check(&args, cli.verbose)?,
+            GodotCommands::Test { args } => godot_cmd::run_test(&args, cli.verbose)?,
+            GodotCommands::Script { args } => godot_cmd::run_script(&args, cli.verbose)?,
+            GodotCommands::Import { args } => godot_cmd::run_import(&args, cli.verbose)?,
+            GodotCommands::Other(args) => godot_cmd::run_other(&args, cli.verbose)?,
+        },
+
         Commands::Gt { command } => match command {
             GtCommands::Log { args } => gt_cmd::run_log(&args, cli.verbose)?,
             GtCommands::Submit { args } => gt_cmd::run_submit(&args, cli.verbose)?,
@@ -2543,6 +2591,7 @@ fn is_operational_command(cmd: &Commands) -> bool {
             | Commands::Rspec { .. }
             | Commands::Pip { .. }
             | Commands::Go { .. }
+            | Commands::Godot { .. }
             | Commands::GolangciLint { .. }
             | Commands::Gt { .. }
     )
@@ -2892,6 +2941,7 @@ mod tests {
             "rspec",
             "pip",
             "go",
+            "godot",
             "gt",
             "golangci-lint",
             "gradlew",
