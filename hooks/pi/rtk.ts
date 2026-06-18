@@ -11,7 +11,13 @@
 //   3 + stdout  Rewrite (advisory) → mutate command
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent"
-import { isToolCallEventType } from "@earendil-works/pi-coding-agent"
+
+// NOTE: deliberately no runtime value import from the pi package. The pi
+// runtime only aliases the `@mariozechner/pi-coding-agent` specifier for jiti;
+// importing a value from `@earendil-works/pi-coding-agent` fails to resolve at
+// load time and disables the extension. We guard on `event.toolName` inline
+// instead (same approach the bundled pi extensions use), which works across
+// both package scopes.
 
 const REWRITE_TIMEOUT_MS = 2_000
 const MIN_SUPPORTED_RTK_MINOR = 23
@@ -58,9 +64,10 @@ export default async function (pi: ExtensionAPI) {
 
   pi.on("tool_call", async (event, ctx) => {
     try {
-      if (!isToolCallEventType("bash", event)) return
+      if (event.toolName !== "bash") return
 
-      const cmd = event.input.command
+      const input = event.input as { command?: string }
+      const cmd = input.command
       if (typeof cmd !== "string" || cmd.trim() === "") return
 
       if (cmd.startsWith("rtk ")) return
@@ -69,7 +76,7 @@ export default async function (pi: ExtensionAPI) {
       // Delegate to RTK.
       const rewritten = await rewriteCommand(pi, cmd, ctx.signal)
       if (rewritten && rewritten !== cmd) {
-        event.input.command = rewritten
+        input.command = rewritten
       }
     } catch (err) {
       // Fail open: never block execution on an unexpected error.
