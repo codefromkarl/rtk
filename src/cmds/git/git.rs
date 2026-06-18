@@ -855,15 +855,33 @@ fn run_status(args: &[String], verbose: u8, global_args: &[String]) -> Result<i3
     let mut raw_cmd = git_cmd_c_locale(global_args);
     raw_cmd.arg("status");
     raw_cmd.args(args);
-    let raw_output = exec_capture(&mut raw_cmd)
-        .map(|r| r.stdout)
+    // Keep the full C-locale probe result (not just stdout) so failure detection
+    // can rely on git's stable English stderr rather than the user-locale stderr
+    // from the porcelain run below.
+    let raw_result = exec_capture(&mut raw_cmd).ok();
+    let raw_output = raw_result
+        .as_ref()
+        .map(|r| r.stdout.clone())
         .unwrap_or_default();
 
     let mut cmd = build_status_command(args, global_args);
     let result = exec_capture(&mut cmd).context("Failed to run git status")?;
 
-    if !result.stderr.is_empty() && result.stderr.contains("not a git repository") {
-        let message = "Not a git repository".to_string();
+    // A failed `git status` (not-a-repo, corrupt index, permission error, ...)
+    // yields empty porcelain stdout that format_status_inner() would otherwise
+    // misreport as "Clean working tree" with exit 0. Detect failure via the
+    // authoritative exit code — never via locale-specific stderr text.
+    if !result.success() {
+        // Build a compact, locale-independent message from the C-locale probe;
+        // fall back to the porcelain run's stderr if the probe is unavailable.
+        let c_stderr = raw_result.as_ref().map_or("", |r| r.stderr.as_str());
+        let message = if c_stderr.contains("not a git repository") {
+            "Not a git repository".to_string()
+        } else if !c_stderr.trim().is_empty() {
+            c_stderr.trim_end().to_string()
+        } else {
+            result.stderr.trim_end().to_string()
+        };
         eprintln!("{}", message);
         let original_cmd = if args.is_empty() {
             "git status".to_string()
